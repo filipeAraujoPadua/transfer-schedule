@@ -27,7 +27,7 @@ public class Transfer implements Serializable{
 	@Column(nullable = false)
 	private Double transfer_amount;
 	
-	@Column(nullable = true)
+	@Column(nullable = false)
 	private Double transfer_rate;
 	
 	@Column(nullable = false)
