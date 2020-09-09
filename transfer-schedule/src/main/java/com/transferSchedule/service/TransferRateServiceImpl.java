@@ -14,6 +14,8 @@ public class TransferRateServiceImpl implements TransferRateService{
 	
 	@Override
 	public Optional<TransferRate> findByRateRangeOfDays(Integer rateRangeOfDays){
-		return null;
+		
+		return transferRatetepository.findByRateRangeOfDays(rateRangeOfDays);
 	}
+	
 }
