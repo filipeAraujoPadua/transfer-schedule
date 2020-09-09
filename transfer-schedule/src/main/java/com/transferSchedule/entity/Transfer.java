@@ -18,22 +18,16 @@ public class Transfer implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@Column(nullable = false)
 	private String source_account;
 	
-	@Column(nullable = false)
 	private String destination_account;
 	
-	@Column(nullable = false)
 	private Double transfer_amount;
 	
-	@Column(nullable = false)
 	private Double transfer_rate;
 	
-	@Column(nullable = false)
 	private Date transfer_date;
 	
-	@Column(nullable = false)
 	private Date scheduling_date;
 	
 	public Transfer() {
