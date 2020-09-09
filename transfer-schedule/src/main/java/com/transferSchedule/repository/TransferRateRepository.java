@@ -1,5 +1,13 @@
 package com.transferSchedule.repository;
 
-public interface TransferRateRepository {
+import java.util.Optional;
 
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.transferSchedule.entity.TransferRate;
+
+public interface TransferRateRepository extends JpaRepository<TransferRate, Long>{
+	
+	Optional<TransferRate> findByRateOfDays(Integer rangeDays);
+	
 }
