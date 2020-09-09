@@ -2,27 +2,35 @@ package com.transferSchedule.entity;
 
 import java.io.Serializable;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "transfer_rate")
 public class TransferRate implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id")
 	private Long id;
 	
-	private Integer rate_range_of_days;
+	@Column(name = "rate_range_of_days")
+	private Integer rateRangeOfDays;
 	
-	private Integer rate_percentage;
+	@Column(name = "rate_percentage")
+	private Integer ratePercentage;
 	
-	private Double rate_multiplier_days;
+	@Column(name = "rate_multiplier_days")
+	private Double rateMultiplierDays;
 	
-	private Double transfer_value_greater;
+	@Column(name = "transfer_value_greater")
+	private Double transferValueGreater;
 	
 	public TransferRate() {
 		
@@ -36,36 +44,35 @@ public class TransferRate implements Serializable{
 		this.id = id;
 	}
 
-	public Integer getRate_range_of_days() {
-		return rate_range_of_days;
+	public Integer getRateRangeOfDays() {
+		return rateRangeOfDays;
 	}
 
-	public void setRate_range_of_days(Integer rate_range_of_days) {
-		this.rate_range_of_days = rate_range_of_days;
+	public void setRateRangeOfDays(Integer rateRangeOfDays) {
+		this.rateRangeOfDays = rateRangeOfDays;
 	}
 
-	public Integer getRate_percentage() {
-		return rate_percentage;
+	public Integer getRatePercentage() {
+		return ratePercentage;
 	}
 
-	public void setRate_percentage(Integer rate_percentage) {
-		this.rate_percentage = rate_percentage;
+	public void setRatePercentage(Integer ratePercentage) {
+		this.ratePercentage = ratePercentage;
 	}
 
-	public Double getRate_multiplier_days() {
-		return rate_multiplier_days;
+	public Double getRateMultiplierDays() {
+		return rateMultiplierDays;
 	}
 
-	public void setRate_multiplier_days(Double rate_multiplier_days) {
-		this.rate_multiplier_days = rate_multiplier_days;
+	public void setRateMultiplierDays(Double rateMultiplierDays) {
+		this.rateMultiplierDays = rateMultiplierDays;
 	}
 
-	public Double getTransfer_value_greater() {
-		return transfer_value_greater;
+	public Double getTransferValueGreater() {
+		return transferValueGreater;
 	}
 
-	public void setTransfer_value_greater(Double transfer_value_greater) {
-		this.transfer_value_greater = transfer_value_greater;
+	public void setTransferValueGreater(Double transferValueGreater) {
+		this.transferValueGreater = transferValueGreater;
 	}
-
 }

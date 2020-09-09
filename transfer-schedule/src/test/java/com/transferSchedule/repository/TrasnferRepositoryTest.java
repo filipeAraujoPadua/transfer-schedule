@@ -39,14 +39,14 @@ public class TrasnferRepositoryTest {
 		Date schedulingDate = new Date();
 		
 		
-		transfer.setSource_account("xxxxxxxx");
-		transfer.setDestination_account("XXXXXXXXX");
-		transfer.setTransfer_amount(100.00);
+		transfer.setSourceAccount("xxxxxxxx");
+		transfer.setDestinationAccount("XXXXXXXXX");
+		transfer.setTransferAmount(100.00);
 		
 		//Refactor to make calculations based on dates
-		transfer.setTransfer_rate(30.00);
-		transfer.setTransfer_date(transferDate);
-		transfer.setScheduling_date(schedulingDate);
+		transfer.setTransferRate(30.00);
+		transfer.setTransferDate(transferDate);
+		transfer.setSchedulingDate(schedulingDate);
 		
 		Transfer response = trasnferRepository.save(transfer);
 		

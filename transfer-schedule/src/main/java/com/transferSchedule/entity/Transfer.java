@@ -8,27 +8,36 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "transfer")
 public class Transfer implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id")
 	private Long id;
 	
-	private String source_account;
+	@Column(name = "source_account")
+	private String sourceAccount;
 	
-	private String destination_account;
+	@Column(name = "destination_account")
+	private String destinationAccount;
 	
-	private Double transfer_amount;
+	@Column(name = "transfer_amount")
+	private Double transferAmount;
 	
-	private Double transfer_rate;
+	@Column(name = "transfer_rate")
+	private Double transferRate;
 	
-	private Date transfer_date;
+	@Column(name = "trasfer_date")
+	private Date transferDate;
 	
-	private Date scheduling_date;
+	@Column(name = "scheduling_date")
+	private Date schedulingDate;
 	
 	public Transfer() {
 
@@ -42,51 +51,51 @@ public class Transfer implements Serializable{
 		this.id = id;
 	}
 
-	public String getSource_account() {
-		return source_account;
+	public String getSourceAccount() {
+		return sourceAccount;
 	}
 
-	public void setSource_account(String source_account) {
-		this.source_account = source_account;
+	public void setSourceAccount(String sourceAccount) {
+		this.sourceAccount = sourceAccount;
 	}
 
-	public String getDestination_account() {
-		return destination_account;
+	public String getDestinationAccount() {
+		return destinationAccount;
 	}
 
-	public void setDestination_account(String destination_account) {
-		this.destination_account = destination_account;
+	public void setDestinationAccount(String destinationAccount) {
+		this.destinationAccount = destinationAccount;
 	}
 
-	public Double getTransfer_amount() {
-		return transfer_amount;
+	public Double getTransferAmount() {
+		return transferAmount;
 	}
 
-	public void setTransfer_amount(Double transfer_amount) {
-		this.transfer_amount = transfer_amount;
+	public void setTransferAmount(Double transferAmount) {
+		this.transferAmount = transferAmount;
 	}
 
-	public Double getTransfer_rate() {
-		return transfer_rate;
+	public Double getTransferRate() {
+		return transferRate;
 	}
 
-	public void setTransfer_rate(Double transfer_rate) {
-		this.transfer_rate = transfer_rate;
+	public void setTransferRate(Double transferRate) {
+		this.transferRate = transferRate;
 	}
 
-	public Date getTransfer_date() {
-		return transfer_date;
+	public Date getTransferDate() {
+		return transferDate;
 	}
 
-	public void setTransfer_date(Date transfer_date) {
-		this.transfer_date = transfer_date;
+	public void setTransferDate(Date transferDate) {
+		this.transferDate = transferDate;
 	}
 
-	public Date getScheduling_date() {
-		return scheduling_date;
+	public Date getSchedulingDate() {
+		return schedulingDate;
 	}
 
-	public void setScheduling_date(Date scheduling_date) {
-		this.scheduling_date = scheduling_date;
+	public void setSchedulingDate(Date schedulingDate) {
+		this.schedulingDate = schedulingDate;
 	}
 }

@@ -8,6 +8,6 @@ import com.transferSchedule.entity.TransferRate;
 
 public interface TransferRateRepository extends JpaRepository<TransferRate, Long>{
 	
-	Optional<TransferRate> findByRateOfDays(Integer rangeDays);
+	Optional<TransferRate> findByRateRangeOfDays(Integer rateRangeOfDays);
 	
 }

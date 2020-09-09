@@ -1,3 +1,6 @@
+DROP TABLE IF EXISTS transfer;
+DROP TABLE IF EXISTS transfer_rate;
+
 create table transfer(
 id serial,
 source_account varchar(8),
