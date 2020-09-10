@@ -20,9 +20,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.transferSchedule.service.TransferRateService;
 import com.transferSchedule.service.TransferService;
-import com.transferSchedule.dto.TransferDTO;
 import com.transferSchedule.entity.Transfer;
-import com.transferSchedule.response.Response;
+import com.transferSchedule.model.request.TransferRequestDto;
+import com.transferSchedule.model.response.TransferResponse;
 
 @RestController
 @RequestMapping("transfer")
@@ -35,10 +35,10 @@ public class TransferController {
 	private TransferRateService transferRateService;
 
 	@PostMapping
-	public ResponseEntity<Response<TransferDTO>> create(@Valid @RequestBody TransferDTO transferDto,
+	public ResponseEntity<TransferResponse<TransferRequestDto>> create(@Valid @RequestBody TransferRequestDto transferDto,
 			BindingResult result) {
 
-		Response<TransferDTO> response = new Response<TransferDTO>();
+		TransferResponse<TransferRequestDto> response = new TransferResponse<TransferRequestDto>();
 
 		if (result.hasErrors()) {
 			result.getAllErrors().forEach(e -> response.getErrors().add(e.getDefaultMessage()));
@@ -62,9 +62,9 @@ public class TransferController {
 	}
 
 	@GetMapping
-	public ResponseEntity<Response<List<TransferDTO>>> findAll() {
+	public ResponseEntity<TransferResponse<List<TransferRequestDto>>> findAll() {
 
-		Response<List<TransferDTO>> response = new Response<List<TransferDTO>>();
+		TransferResponse<List<TransferRequestDto>> response = new TransferResponse<List<TransferRequestDto>>();
 
 		List<Transfer> listTransfer = transferService.findAll();
 
@@ -72,14 +72,14 @@ public class TransferController {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
 		}
 
-		List<TransferDTO> transferDto = new ArrayList<>();
+		List<TransferRequestDto> transferDto = new ArrayList<>();
 		listTransfer.forEach(i -> transferDto.add(convertEntityToDto(i)));
 		response.setData(transferDto);
 
 		return ResponseEntity.ok().body(response);
 	}
 
-	private Transfer convertDtoToEntity(TransferDTO transferDto) {
+	private Transfer convertDtoToEntity(TransferRequestDto transferDto) {
 
 		Transfer transfer = new Transfer();
 
@@ -94,9 +94,9 @@ public class TransferController {
 		return transfer;
 	}
 
-	private TransferDTO convertEntityToDto(Transfer transfer) {
+	private TransferRequestDto convertEntityToDto(Transfer transfer) {
 
-		TransferDTO transferDto = new TransferDTO();
+		TransferRequestDto transferDto = new TransferRequestDto();
 
 		transferDto.setId(transfer.getId());
 		transferDto.setSourceAccount(transfer.getSourceAccount());

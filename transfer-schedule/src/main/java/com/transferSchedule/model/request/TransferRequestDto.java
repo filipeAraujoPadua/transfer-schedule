@@ -1,4 +1,4 @@
-package com.transferSchedule.dto;
+package com.transferSchedule.model.request;
 
 import java.util.Date;
 
@@ -18,7 +18,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class TransferDTO {
+public class TransferRequestDto {
 
 	private Long id;
 	

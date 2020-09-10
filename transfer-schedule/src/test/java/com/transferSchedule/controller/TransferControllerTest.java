@@ -23,9 +23,9 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.transferSchedule.dto.TransferDTO;
 import com.transferSchedule.entity.Transfer;
 import com.transferSchedule.entity.TransferRate;
+import com.transferSchedule.model.request.TransferRequestDto;
 import com.transferSchedule.service.TransferRateService;
 import com.transferSchedule.service.TransferService;
 
@@ -121,7 +121,7 @@ public class TransferControllerTest {
 								 Double jsonTransferAmount, Double jsonTransferRate, Date jsonTransferDate,
 								 Date jsonSchedulingDate) throws JsonProcessingException {
 		
-		TransferDTO transferDto = new TransferDTO();
+		TransferRequestDto transferDto = new TransferRequestDto();
 		
 		transferDto.setId(jsonId);
 		transferDto.setSourceAccount(jsonSourceAccount);

@@ -1,4 +1,4 @@
-package com.transferSchedule.response;
+package com.transferSchedule.model.response;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,7 +10,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-public class Response<T> {
+public class TransferResponse<T> {
 
 	private T data;
 	private List<String> errors;
