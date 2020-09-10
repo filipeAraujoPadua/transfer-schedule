@@ -54,8 +54,8 @@ public class TransferRepositoryTest {
 		Date transferDate = new Date();
 		Date schedulingDate = new Date();
 				
-		transfer.setSourceAccount("xxxxxxxx");
-		transfer.setDestinationAccount("XXXXXXXXX");
+		transfer.setSourceAccount("111111");
+		transfer.setDestinationAccount("111111");
 		transfer.setTransferAmount(100.00);
 		transfer.setTransferRate(30.00);
 		transfer.setTransferDate(transferDate);

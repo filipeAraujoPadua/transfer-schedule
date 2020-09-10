@@ -3,8 +3,8 @@ DROP TABLE IF EXISTS transfer_rate;
 
 create table TRANSFER(
 ID serial,
-SOURCE_ACCOUNT varchar(8),
-DESTINATION_ACCOUNT varchar(8),
+SOURCE_ACCOUNT varchar(6),
+DESTINATION_ACCOUNT varchar(6),
 TRANSFER_AMOUNT float,
 TRANSFER_RATE float,	
 TRANSFER_DATE date,
