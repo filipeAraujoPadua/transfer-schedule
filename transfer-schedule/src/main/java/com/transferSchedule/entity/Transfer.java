@@ -10,11 +10,18 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 @Entity
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 @Table(name = "TRANSFER")
 public class Transfer implements Serializable{
 
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 6098657671824563659L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -39,63 +46,4 @@ public class Transfer implements Serializable{
 	@Column(name = "SCHEDULING_DATE")
 	private Date schedulingDate;
 	
-	public Transfer() {
-
-	}
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public String getSourceAccount() {
-		return sourceAccount;
-	}
-
-	public void setSourceAccount(String sourceAccount) {
-		this.sourceAccount = sourceAccount;
-	}
-
-	public String getDestinationAccount() {
-		return destinationAccount;
-	}
-
-	public void setDestinationAccount(String destinationAccount) {
-		this.destinationAccount = destinationAccount;
-	}
-
-	public Double getTransferAmount() {
-		return transferAmount;
-	}
-
-	public void setTransferAmount(Double transferAmount) {
-		this.transferAmount = transferAmount;
-	}
-
-	public Double getTransferRate() {
-		return transferRate;
-	}
-
-	public void setTransferRate(Double transferRate) {
-		this.transferRate = transferRate;
-	}
-
-	public Date getTransferDate() {
-		return transferDate;
-	}
-
-	public void setTransferDate(Date transferDate) {
-		this.transferDate = transferDate;
-	}
-
-	public Date getSchedulingDate() {
-		return schedulingDate;
-	}
-
-	public void setSchedulingDate(Date schedulingDate) {
-		this.schedulingDate = schedulingDate;
-	}
 }

@@ -9,6 +9,7 @@ Projeto criado com Spring Boot e Java 14
 Banco de dados H2 em memória
 Testes com JUnit e Mockito com banco H2 em memória
 Documentação dos endpoints com Swagger
+Project Lombok
 
 Como executar a aplicação
 Certifique-se de ter o Maven instalado e adicionado ao PATH de seu sistema operacional, assim como o Git.
