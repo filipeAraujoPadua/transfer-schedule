@@ -3,6 +3,13 @@ package com.transferSchedule.response;
 import java.util.ArrayList;
 import java.util.List;
 
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+@Getter
+@Setter
+@NoArgsConstructor
 public class Response<T> {
 
 	private T data;
@@ -14,20 +21,5 @@ public class Response<T> {
 		}
 		return errors;
 	}
-	
-	public Response() {
-		
-	}
 
-	public T getData() {
-		return data;
-	}
-
-	public void setData(T data) {
-		this.data = data;
-	}
-
-	public void setErrors(List<String> errors) {
-		this.errors = errors;
-	}
 }
