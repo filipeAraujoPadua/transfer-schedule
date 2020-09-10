@@ -1,4 +1,4 @@
-package com.transferSchedule.service;
+package com.transferSchedule.service.impl;
 
 import java.util.List;
 
@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service;
 
 import com.transferSchedule.entity.Transfer;
 import com.transferSchedule.repository.TransferRepository;
+import com.transferSchedule.service.TransferRateService;
+import com.transferSchedule.service.TransferService;
 
 @Service
 public class TransferServiceImpl implements TransferService {

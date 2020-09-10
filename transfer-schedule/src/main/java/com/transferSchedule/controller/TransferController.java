@@ -40,7 +40,7 @@ public class TransferController {
 	public ResponseEntity<TransferResponse<TransferRequestDto>> create(@Valid @RequestBody TransferRequestDto transferDto,
 			BindingResult result) {
 
-		TransferResponse<TransferRequestDto> response = new TransferResponse<TransferRequestDto>();
+		var response = new TransferResponse<TransferRequestDto>();
 
 		if (result.hasErrors()) {
 			result.getAllErrors().forEach(e -> response.getErrors().add(e.getDefaultMessage()));
@@ -51,12 +51,12 @@ public class TransferController {
 				transferDto.getSchedulingDate(), transferDto.getTransferAmount());
 
 		if (rateTransfer == null || rateTransfer == 0) {
-			response.getErrors().add("Não existe nenhuma taxa aplicavel para a transferencia");
+			response.getErrors().add("There is no fee for the transfer");
 
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
 		}
 
-		Transfer transfer = transferService.save(transferMapper.convertDtoToEntity(transferDto));
+		var transfer = transferService.save(transferMapper.convertDtoToEntity(transferDto));
 
 		response.setData(transferMapper.convertEntityToDto(transfer));
 
@@ -68,7 +68,7 @@ public class TransferController {
 
 		TransferResponse<List<TransferRequestDto>> response = new TransferResponse<List<TransferRequestDto>>();
 
-		List<Transfer> listTransfer = transferService.findAll();
+		var listTransfer = transferService.findAll();
 
 		if (listTransfer.isEmpty()) {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);

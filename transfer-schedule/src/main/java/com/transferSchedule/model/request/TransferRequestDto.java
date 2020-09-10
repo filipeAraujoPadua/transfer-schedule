@@ -22,23 +22,23 @@ public class TransferRequestDto {
 
 	private Long id;
 	
-	@NotNull(message="A conta de origem deve ser informada")
-	@Length(min=6, max=6, message="A conta de origem deve ter 6 digitos")
+	@NotNull(message="The source account must be informed")
+	@Length(min=6, max=6, message="The source account must be 6 digits")
 	private String sourceAccount;
 	
-	@NotNull(message="A conta de destino deve ser informada")
-	@Length(min=6, max=6, message="A conta de destino deve ter 6 digitos")
+	@NotNull(message="The target account must be informed")
+	@Length(min=6, max=6, message="The target account must be 6 digits")
 	private String destinationAccount;
 
-	@NotNull(message="O valor deve ser informado")
+	@NotNull(message="The amount must be informed")
 	private Double transferAmount;
 
 	private Double transferRate;
 
-	@NotNull(message="A data de transferencia deve ser informada")
+	@NotNull(message="The transfer date must be informed")
 	private Date transferDate;
 
-	@NotNull(message="A data de agendamento deve ser informada")
+	@NotNull(message="The scheduling date must be informed")
 	private Date schedulingDate;
 
 }
