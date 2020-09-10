@@ -1,6 +1,7 @@
 package com.transferSchedule.service.impl;
 
 import java.util.Date;
+import java.util.Objects;
 import java.util.Optional;
 
 import org.joda.time.DateTime;
@@ -8,6 +9,7 @@ import org.joda.time.Interval;
 import org.joda.time.Period;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.lang.NonNull;
 
 import com.transferSchedule.entity.TransferRate;
 import com.transferSchedule.repository.TransferRateRepository;
@@ -24,57 +26,59 @@ public class TransferRateServiceImpl implements TransferRateService {
 
 		return transferRatetepository.findByRateRangeOfDays(rateRangeOfDays);
 	}
-
-	// Metodo que recebe valor e a data de agendamento da TransfeRate
+	
 	public Double findRate(Date transferDate, Date schedulingDate, Double transferAmount) {
 
 		Double response = null;
 
-		// chama calculo de intervalo das datas
 		Integer rangeOfDays = findRangeOfDays(transferDate, schedulingDate);
 
-		// chama findByRateRangeOfDays
 		Optional<TransferRate> transferRate = findByRateRangeOfDays(rangeOfDays);
 
 		if (transferRate.isPresent()) {
-			// faz o calculo de 1% do valor total
-			Double onePercentageValue = transferAmount / 100;
-			
-			//valida se existe porcentagem de taxa e se não existe um valor superior
-			if (transferRate.get().getRatePercentage() != null 
-					&& transferRate.get().getRatePercentage() != 0
-					&& (transferRate.get().getTransferValueGreater() == null
-							&& transferRate.get().getRatePercentage() == 0)) {
-				
-				response = response + (transferRate.get().getRatePercentage() * onePercentageValue);
-			}
-
-			//calculo de porcentagem quando existe valor superior
-			if(transferRate.get().getTransferValueGreater() != null
-					&& transferRate.get().getRatePercentage() != 0) {
-				if(transferAmount > transferRate.get().getTransferValueGreater()) {
-					response = response + (transferRate.get().getRatePercentage() * onePercentageValue);
-				}
-			}
-			
-			//valor de taxa
-			if (transferRate.get().getRateValue() != null 
-					&& transferRate.get().getRateValue() != 0) {
-				response = response + transferRate.get().getRateValue();
-			}
-
-			//valor a ser multiplicado pelo intervalo de dias
-			if (transferRate.get().getRateMultiplier() != null 
-					&& transferRate.get().getRateMultiplier() != 0) {
-				response = response + (transferRate.get().getRateMultiplier() * rangeOfDays);
-			}
-
+			this.validateTransferValues(transferAmount, transferRate.get(), rangeOfDays);
 		}
 
 		return response;
 	}
 
-	// Metodo pegar o intervalo de datas
+	private Double validateTransferValues(@NonNull final Double transferAmount, @NonNull TransferRate transferRate, Integer rangeOfDays) {
+		Double response = null;
+		Double onePercentageValue = transferAmount / 100;
+
+		if (this.validateNullEmptyValues(transferRate.getRatePercentage())
+				&& this.validateNullEmptyValues(transferRate.getTransferValueGreater())) {
+			response = response + (transferRate.getRatePercentage() * onePercentageValue);
+		}
+
+		if(transferRate.getTransferValueGreater() != null
+				&& transferRate.getRatePercentage() != 0) {
+			if(transferAmount > transferRate.getTransferValueGreater()) {
+				response = response + (transferRate.getRatePercentage() * onePercentageValue);
+			}
+		}
+
+		if (transferRate.getRateValue() != null
+				&& transferRate.getRateValue() != 0) {
+			response = response + transferRate.getRateValue();
+		}
+
+		if (transferRate.getRateMultiplier() != null
+				&& transferRate.getRateMultiplier() != 0) {
+			response = response + (transferRate.getRateMultiplier() * rangeOfDays);
+		}
+
+		return response;
+	}
+	
+	private Boolean validateNullEmptyValues(@NonNull Double value) {
+		return Objects.isNull(value) && !value.equals(0);
+	}
+	
+	private Boolean validateNullEmptyValues(@NonNull Integer value) {
+		return Objects.isNull(value) && !value.equals(0);
+	}
+
 	public Integer findRangeOfDays(Date transferDate, Date schedulingDate) {
 
 		DateTime dtTransferDate = new DateTime(transferDate);
@@ -86,5 +90,4 @@ public class TransferRateServiceImpl implements TransferRateService {
 		return period.getDays();
 
 	}
-
 }

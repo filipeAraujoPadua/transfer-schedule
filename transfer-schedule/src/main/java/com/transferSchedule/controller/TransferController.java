@@ -33,7 +33,6 @@ public class TransferController {
 	@Autowired
 	private TransferRateService transferRateService;
 	
-	@Autowired
 	private TransferMapper transferMapper;
 
 	@PostMapping
