@@ -17,12 +17,6 @@ git clone https://github.com/filipeAraujoPadua/transfer-schedule
 cd transfer-schedule
 mvn spring-boot:run
 Acesse os endpoints através da url http://localhost:8080
-Também é possível compilar o projeto para executar em um ambiente de produção, para isso execute o seguinte comando na raiz do projeto
-
-mvn clean install
-O pacote será gerado dentro da pasta target, basta executá-lo com o comando abaixo, não esquecendo de configurar qual o profile e a porta que a aplicação deverá utilizar
-
-java -jar -Dspring.profiles.active=prod -Dserver.port=443 walletAPI-0.0.1-SNAPSHOT.jar
 
 Como executar os testes
 Os testes podem ser executados com o seguinte comando:
