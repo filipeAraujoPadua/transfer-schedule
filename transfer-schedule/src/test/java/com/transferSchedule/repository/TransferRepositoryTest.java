@@ -16,10 +16,10 @@ import com.transferSchedule.entity.Transfer;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class TrasnferRepositoryTest {
+public class TransferRepositoryTest {
 
 	@Autowired
-	TrasnferRepository trasnferRepository;
+	TransferRepository trasnferRepository;
 	
 	@Before
 	public void setUp() {
