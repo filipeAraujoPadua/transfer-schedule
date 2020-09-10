@@ -12,7 +12,10 @@ public class TransferServiceImpl implements TransferService {
 
 	@Autowired
 	TransferRepository transferRepository;
-		
+	
+	@Autowired
+	TransferRateService transferRateService;
+	
 	@Override
 	public Transfer save (Transfer transfer){
 		return transferRepository.save(transfer);
