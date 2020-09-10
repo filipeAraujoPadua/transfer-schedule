@@ -4,10 +4,12 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
+import org.springframework.stereotype.Service;
 
 import com.transferSchedule.entity.Transfer;
 import com.transferSchedule.repository.TransferRepository;
 
+@Service
 public class TransferServiceImpl implements TransferService {
 
 	@Autowired
@@ -23,7 +25,7 @@ public class TransferServiceImpl implements TransferService {
 	
 	@Override
 	public List<Transfer> findAll(){
-		return transferRepository.findAll(Sort.by(Sort.Direction.DESC, "id"));
+		return transferRepository.findAll();
 	}
 	
 }

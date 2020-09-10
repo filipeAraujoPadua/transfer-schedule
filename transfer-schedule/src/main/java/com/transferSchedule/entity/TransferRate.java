@@ -10,29 +10,29 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "transfer_rate")
+@Table(name = "TRANSFER_RATE")
 public class TransferRate implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id")
+	@Column(name = "ID")
 	private Long id;
 	
-	@Column(name = "rate_range_of_days")
+	@Column(name = "RATE_RANG_OF_DAYS")
 	private Integer rateRangeOfDays;
 	
-	@Column(name = "rate_percentage")
+	@Column(name = "RATE_PERCENTAGE")
 	private Integer ratePercentage;
 	
-	@Column(name = "rate_value")
+	@Column(name = "RATE_VALUE")
 	private Double rateValue;
 	
-	@Column(name = "rate_multiplier")
+	@Column(name = "RATE_MULTIPLIER")
 	private Double rateMultiplier;
 	
-	@Column(name = "transfer_value_greater")
+	@Column(name = "TRANSFER_VALUE_GREATER")
 	private Double transferValueGreater;
 	
 	public TransferRate() {

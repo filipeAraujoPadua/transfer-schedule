@@ -11,32 +11,32 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "transfer")
+@Table(name = "TRANSFER")
 public class Transfer implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id")
+	@Column(name = "ID")
 	private Long id;
 	
-	@Column(name = "source_account")
+	@Column(name = "SOURCE_ACCOUNT")
 	private String sourceAccount;
 	
-	@Column(name = "destination_account")
+	@Column(name = "DESTINATION_ACCOUNT")
 	private String destinationAccount;
 	
-	@Column(name = "transfer_amount")
+	@Column(name = "TRANSFER_AMOUNT")
 	private Double transferAmount;
 	
-	@Column(name = "transfer_rate")
+	@Column(name = "TRANSFER_RATE")
 	private Double transferRate;
 	
-	@Column(name = "trasfer_date")
+	@Column(name = "TRANSFER_DATE")
 	private Date transferDate;
 	
-	@Column(name = "scheduling_date")
+	@Column(name = "SCHEDULING_DATE")
 	private Date schedulingDate;
 	
 	public Transfer() {
