@@ -14,11 +14,11 @@ public class TransferDTO {
 	private Long id;
 	
 	@NotNull(message="A conta de origem deve ser informada")
-	@Length(min=6, message="A conta de origem deve ter 6 digitos")
+	@Length(min=6, max=6, message="A conta de origem deve ter 6 digitos")
 	private String sourceAccount;
 	
 	@NotNull(message="A conta de destino deve ser informada")
-	@Length(min=6, message="A conta de destino deve ter 6 digitos")
+	@Length(min=6, max=6, message="A conta de destino deve ter 6 digitos")
 	private String destinationAccount;
 
 	@NotNull(message="O valor deve ser informado")
@@ -37,8 +37,8 @@ public class TransferDTO {
 	}
 
 	public TransferDTO(Long id,
-			@NotNull(message = "A conta de origem deve ser informada") @Length(min = 6, message = "A conta de origem deve ter 6 digitos") String sourceAccount,
-			@NotNull(message = "A conta de destino deve ser informada") @Length(min = 6, message = "A conta de destino deve ter 6 digitos") String destinationAccount,
+			@NotNull(message = "A conta de origem deve ser informada") @Length(min = 6, max=6, message = "A conta de origem deve ter 6 digitos") String sourceAccount,
+			@NotNull(message = "A conta de destino deve ser informada") @Length(min = 6, max=6, message = "A conta de destino deve ter 6 digitos") String destinationAccount,
 			@NotNull(message = "O valor deve ser informado") Double transferAmount, Double transferRate,
 			@NotNull(message = "A data de transferencia deve ser informada") Date transferDate,
 			@NotNull(message = "A data de agendamento deve ser informada") Date schedulingDate) {
