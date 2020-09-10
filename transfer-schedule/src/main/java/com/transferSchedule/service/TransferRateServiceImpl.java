@@ -9,7 +9,6 @@ import org.joda.time.Period;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.transferSchedule.entity.Transfer;
 import com.transferSchedule.entity.TransferRate;
 import com.transferSchedule.repository.TransferRateRepository;
 
