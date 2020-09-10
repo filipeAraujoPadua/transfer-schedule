@@ -15,7 +15,8 @@ create table transfer_rate(
 id serial,
 rate_range_of_days integer,
 rate_percentage integer,
-rate_multiplier_days float,
+rate_value float,
+rate_multiplier float,
 transfer_value_greater float,	
 primary key (id));
 

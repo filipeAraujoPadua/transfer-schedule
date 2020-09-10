@@ -26,8 +26,11 @@ public class TransferRate implements Serializable{
 	@Column(name = "rate_percentage")
 	private Integer ratePercentage;
 	
-	@Column(name = "rate_multiplier_days")
-	private Double rateMultiplierDays;
+	@Column(name = "rate_value")
+	private Double rateValue;
+	
+	@Column(name = "rate_multiplier")
+	private Double rateMultiplier;
 	
 	@Column(name = "transfer_value_greater")
 	private Double transferValueGreater;
@@ -60,12 +63,20 @@ public class TransferRate implements Serializable{
 		this.ratePercentage = ratePercentage;
 	}
 
-	public Double getRateMultiplierDays() {
-		return rateMultiplierDays;
+	public Double getRateValue() {
+		return rateValue;
 	}
 
-	public void setRateMultiplierDays(Double rateMultiplierDays) {
-		this.rateMultiplierDays = rateMultiplierDays;
+	public void setRateValue(Double rateValue) {
+		this.rateValue = rateValue;
+	}
+
+	public Double getRateMultiplier() {
+		return rateMultiplier;
+	}
+
+	public void setRateMultiplier(Double rateMultiplier) {
+		this.rateMultiplier = rateMultiplier;
 	}
 
 	public Double getTransferValueGreater() {
@@ -75,4 +86,5 @@ public class TransferRate implements Serializable{
 	public void setTransferValueGreater(Double transferValueGreater) {
 		this.transferValueGreater = transferValueGreater;
 	}
+
 }
