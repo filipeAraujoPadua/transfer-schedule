@@ -96,6 +96,13 @@
 			<optional>true</optional>
 		</dependency>
 		
+		<dependency>
+            <groupId>com.github.javafaker</groupId>
+            <artifactId>javafaker</artifactId>
+            <version>0.18</version>
+            <scope>test</scope>
+        </dependency>
+		
 	</dependencies>
 
 	<build>

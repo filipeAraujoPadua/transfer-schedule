@@ -2,20 +2,20 @@ package com.transferSchedule.repository;
 
 import static org.junit.Assert.assertNotNull;
 
-import java.util.Optional;
-
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import com.transferSchedule.entity.TransferRate;
+import com.transferSchedule.seed.TransferRateSeeder;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
+@ActiveProfiles("test")
 public class TransferRateRepositoryTest {
 
 	@Autowired
@@ -23,15 +23,8 @@ public class TransferRateRepositoryTest {
 	
 	@Before
 	public void setUp() {
-		var transferRate = TransferRate.builder()
-				.id(null)
-				.rateMinDay(0)
-				.rateMaxDay(0)
-				.ratePercentage(3)
-				.rateValue(3.0)
-				.rateMultiplier(null)
-				.transferValueGreater(null).build();
 		
+		var transferRate = TransferRateSeeder.seedTransferRateSave();
 		transferRateRepository.save(transferRate);
 	}
 	
@@ -42,19 +35,15 @@ public class TransferRateRepositoryTest {
 	}
 	
 	@Test
-	public void save () {
-		var transferRate = TransferRate.builder()
-				.id(null)
-				.rateMinDay(0)
-				.rateMaxDay(0)
-				.ratePercentage(3)
-				.rateValue(3.0)
-				.rateMultiplier(null)
-				.transferValueGreater(null).build();
-		
-		TransferRate response = transferRateRepository.save(transferRate);
-		
+	public void testSave () {
+		var transferRate = TransferRateSeeder.seedTransferRateSave();		
+		var response = transferRateRepository.save(transferRate);		
 		assertNotNull(response);
 	}
 	
+	@Test
+	public void testFindAll () {
+		var response = transferRateRepository.findAll();		
+		assertNotNull(response);
+	}
 }

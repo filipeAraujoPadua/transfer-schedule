@@ -1,13 +1,17 @@
 package com.transferSchedule.mapper;
 
+import org.springframework.lang.NonNull;
+
 import com.transferSchedule.entity.Transfer;
 import com.transferSchedule.model.request.TransferRequestDto;
 
+import lombok.NoArgsConstructor;
+
 public class TransferMapper {
 
-	public Transfer convertDtoToEntity(TransferRequestDto transferDto) {
+	public static Transfer convertDtoToEntity(@NonNull final TransferRequestDto transferDto) {
 
-		var transfer = Transfer.builder().id(transferDto.getId()).sourceAccount(transferDto.getSourceAccount())
+		final var transfer = Transfer.builder().id(transferDto.getId()).sourceAccount(transferDto.getSourceAccount())
 				.destinationAccount(transferDto.getDestinationAccount()).transferAmount(transferDto.getTransferAmount())
 				.transferRate(transferDto.getTransferRate()).transferDate(transferDto.getTransferDate())
 				.schedulingDate(transferDto.getSchedulingDate()).build();
@@ -15,9 +19,9 @@ public class TransferMapper {
 		return transfer;
 	}
 
-	public TransferRequestDto convertEntityToDto(Transfer transfer) {
+	public static TransferRequestDto convertEntityToDto(@NonNull final Transfer transfer) {
 
-		var transferDto = TransferRequestDto.builder().id(transfer.getId()).sourceAccount(transfer.getSourceAccount())
+		final var transferDto = TransferRequestDto.builder().id(transfer.getId()).sourceAccount(transfer.getSourceAccount())
 				.destinationAccount(transfer.getDestinationAccount()).transferAmount(transfer.getTransferAmount())
 				.transferRate(transfer.getTransferRate()).transferDate(transfer.getTransferDate())
 				.schedulingDate(transfer.getSchedulingDate()).build();

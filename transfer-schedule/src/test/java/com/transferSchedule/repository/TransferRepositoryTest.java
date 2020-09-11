@@ -15,6 +15,7 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import com.transferSchedule.entity.Transfer;
+import com.transferSchedule.seed.TransferSeeder;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -27,17 +28,7 @@ public class TransferRepositoryTest {
 	@Before
 	public void setUp() {
 		
-		Transfer transfer = new Transfer();
-		Date transferDate = new Date();
-		Date schedulingDate = new Date();		
-		
-		transfer.setSourceAccount("000000");
-		transfer.setDestinationAccount("000000");
-		transfer.setTransferAmount(100.00);
-		transfer.setTransferRate(30.00);
-		transfer.setTransferDate(transferDate);
-		transfer.setSchedulingDate(schedulingDate);
-
+		final var transfer = TransferSeeder.seedTransferSave();
 		transferRepository.save(transfer);
 	}
 	
@@ -50,17 +41,7 @@ public class TransferRepositoryTest {
 	@Test
 	public void testSave() {
 		
-		Transfer transfer = new Transfer();
-		Date transferDate = new Date();
-		Date schedulingDate = new Date();
-				
-		transfer.setSourceAccount("111111");
-		transfer.setDestinationAccount("111111");
-		transfer.setTransferAmount(100.00);
-		transfer.setTransferRate(30.00);
-		transfer.setTransferDate(transferDate);
-		transfer.setSchedulingDate(schedulingDate);
-		
+		final var transfer = TransferSeeder.seedTransferSave();
 		Transfer response = transferRepository.save(transfer);
 		
 		assertNotNull(response);
@@ -69,8 +50,7 @@ public class TransferRepositoryTest {
 	@Test
 	public void testFindAll() {
 		
-		List<Transfer> response = transferRepository.findAll();
-		
+		List<Transfer> response = transferRepository.findAll();		
 		assertNotNull(response);
 	}
 }

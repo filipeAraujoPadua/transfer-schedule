@@ -38,7 +38,7 @@ public class TransferRateServiceTest {
 	
 	@Test
 	public void testFindByRateRangeOfDays() {
-		Optional<TransferRate> response = transferRateService.findByRateRangeOfDays(new Integer(0) );
+		var response = transferRateService.findByRateRangeOfDays(new Integer(0) );
 		assertNotNull(response);
 	}
 	

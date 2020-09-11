@@ -7,7 +7,6 @@ import java.util.Optional;
 
 import org.joda.time.DateTime;
 import org.joda.time.Interval;
-import org.joda.time.Period;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.lang.NonNull;
@@ -23,9 +22,9 @@ public class TransferRateServiceImpl implements TransferRateService {
 	TransferRateRepository transferRatetepository;
 
 	@Override
-	public Optional<TransferRate> findByRateRangeOfDays(Integer rateRangeOfDays) {
+	public Optional<TransferRate> findByRateRangeOfDays(@NonNull final Integer rateRangeOfDays) {
 
-		var listTransferRate = this.findAll();
+		final var listTransferRate = this.findAll();
 		var transferRateRespnse = new TransferRate();
 				
 		for (TransferRate obj : listTransferRate) {
@@ -54,10 +53,8 @@ public class TransferRateServiceImpl implements TransferRateService {
 				break;
 			}
 		};
-		
-		Optional<TransferRate> response = Optional.of(transferRateRespnse);
-		
-		return response;
+				
+		return Optional.of(transferRateRespnse);
 	}
 	
 	@Override
@@ -66,13 +63,13 @@ public class TransferRateServiceImpl implements TransferRateService {
 		return transferRatetepository.findAll();
 	}
 	
-	public Double findRate(Date transferDate, Date schedulingDate, Double transferAmount) {
+	public Double findRate(@NonNull final Date transferDate, @NonNull final Date schedulingDate, @NonNull final Double transferAmount) {
 
 		Double response = null;
 
-		Integer rangeOfDays = findRangeOfDays(transferDate, schedulingDate);
+		final var rangeOfDays = findRangeOfDays(transferDate, schedulingDate);
 
-		Optional<TransferRate> transferRate = findByRateRangeOfDays(rangeOfDays);
+		var transferRate = findByRateRangeOfDays(rangeOfDays);
 
 		if (transferRate.isPresent()) {
 			response = this.validateTransferValues(transferAmount, transferRate.get(), rangeOfDays);
@@ -81,49 +78,50 @@ public class TransferRateServiceImpl implements TransferRateService {
 		return response;
 	}
 
-	private Double validateTransferValues(@NonNull final Double transferAmount, @NonNull TransferRate transferRate, Integer rangeOfDays) {
+	private Double validateTransferValues(@NonNull final Double transferAmount, @NonNull final TransferRate transferRate, @NonNull final Integer rangeOfDays) {
 		Double response = 0.0;
 		Double onePercentageValue = transferAmount / 100;
 
-		if (!this.validateNullEmptyValues(transferRate.getRatePercentage())
-				&& this.validateNullEmptyValues(transferRate.getTransferValueGreater())) {
+		if (this.validateNullEmptyValues(transferRate.getRatePercentage())
+				&& !this.validateNullEmptyValues(transferRate.getTransferValueGreater())) {
 			response = response + (transferRate.getRatePercentage() * onePercentageValue);
 		}
 
-		if(!transferRate.getTransferValueGreater().isNaN() || (!this.validateNullEmptyValues(transferRate.getTransferValueGreater()))) {
+		if(this.validateNullEmptyValues(transferRate.getTransferValueGreater())) {
 			if(transferAmount > transferRate.getTransferValueGreater()) {
 				response = response + (transferRate.getRatePercentage() * onePercentageValue);
 			}
 		}
 
-		if (!this.validateNullEmptyValues(transferRate.getRateValue())) {
+		if (this.validateNullEmptyValues(transferRate.getRateValue())) {
 			response = response + transferRate.getRateValue();
 		}
 
-		if (!this.validateNullEmptyValues(transferRate.getRateMultiplier())) {
+		if (this.validateNullEmptyValues(transferRate.getRateMultiplier())) {
 			response = response + (transferRate.getRateMultiplier() * rangeOfDays);
 		}
 
 		return response;
 	}	
 
-	public Integer findRangeOfDays(Date transferDate, Date schedulingDate) {
+	public Integer findRangeOfDays(@NonNull final Date transferDate, @NonNull final  Date schedulingDate) {
 
-		DateTime dtTransferDate = new DateTime(transferDate);
-		DateTime dtSchedulingDate = new DateTime(schedulingDate);
+		final var dtTransferDate = new DateTime(transferDate);
+		final var dtSchedulingDate = new DateTime(schedulingDate);
 
-		Interval intervalo = new Interval(dtTransferDate, dtSchedulingDate);
-		Period period = intervalo.toPeriod();
+		final var  intervalo = new Interval(dtTransferDate, dtSchedulingDate);
+		final var  period = intervalo.toPeriod();
 
 		return period.getDays();
 
 	}
 	
 	private Boolean validateNullEmptyValues(@NonNull Double value) {
-		return Objects.isNull(value) && !value.equals(0.0);
+		return !Objects.isNull(value) && !value.equals(0.0);
 	}
 	
 	private Boolean validateNullEmptyValues(@NonNull Integer value) {
-		return Objects.isNull(value) && !value.equals(0);
+		return !Objects.isNull(value) && !value.equals(0);
 	}
+		
 }

@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.transferSchedule.service.TransferRateService;
 import com.transferSchedule.service.TransferService;
-import com.transferSchedule.entity.Transfer;
 import com.transferSchedule.mapper.TransferMapper;
 import com.transferSchedule.model.request.TransferRequestDto;
 import com.transferSchedule.model.response.TransferResponse;
@@ -33,8 +32,6 @@ public class TransferController {
 	@Autowired
 	private TransferRateService transferRateService;
 	
-	private TransferMapper transferMapper;
-
 	@PostMapping
 	public ResponseEntity<TransferResponse<TransferRequestDto>> create(@Valid @RequestBody TransferRequestDto transferDto,
 			BindingResult result) {
@@ -46,7 +43,7 @@ public class TransferController {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
 		}
 
-		Double rateTransfer = transferRateService.findRate(transferDto.getTransferDate(),
+		final Double rateTransfer = transferRateService.findRate(transferDto.getTransferDate(),
 				transferDto.getSchedulingDate(), transferDto.getTransferAmount());
 
 		if (rateTransfer == null || rateTransfer == 0) {
@@ -57,9 +54,9 @@ public class TransferController {
 
 		transferDto.setTransferRate(rateTransfer);
 		
-		var transfer = transferService.save(transferMapper.convertDtoToEntity(transferDto));
+		final var transfer = transferService.save(TransferMapper.convertDtoToEntity(transferDto));
 
-		response.setData(transferMapper.convertEntityToDto(transfer));
+		response.setData(TransferMapper.convertEntityToDto(transfer));
 
 		return ResponseEntity.status(HttpStatus.CREATED).body(response);
 	}
@@ -67,16 +64,17 @@ public class TransferController {
 	@GetMapping
 	public ResponseEntity<TransferResponse<List<TransferRequestDto>>> findAll() {
 
-		TransferResponse<List<TransferRequestDto>> response = new TransferResponse<List<TransferRequestDto>>();
+		var response = new TransferResponse<List<TransferRequestDto>>();
 
-		var listTransfer = transferService.findAll();
+		final var listTransfer = transferService.findAll();
 
 		if (listTransfer.isEmpty()) {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
 		}
 
 		List<TransferRequestDto> transferDto = new ArrayList<>();
-		listTransfer.forEach(i -> transferDto.add(transferMapper.convertEntityToDto(i)));
+		listTransfer.forEach(i -> transferDto.add(TransferMapper.convertEntityToDto(i)));
+		
 		response.setData(transferDto);
 
 		return ResponseEntity.ok().body(response);

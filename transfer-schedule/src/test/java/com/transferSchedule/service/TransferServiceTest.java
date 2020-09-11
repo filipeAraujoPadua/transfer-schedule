@@ -45,8 +45,7 @@ public class TransferServiceTest {
 	@Test
 	public void testSave () {
 		
-		BDDMockito.given(transferRepository.save(Mockito.mock(Transfer.class))).willReturn(new Transfer());
-		
+		BDDMockito.given(transferRepository.save(Mockito.mock(Transfer.class))).willReturn(new Transfer());		
 		Transfer response = transferService.save(new Transfer());
 		
 		assertNotNull(response);
