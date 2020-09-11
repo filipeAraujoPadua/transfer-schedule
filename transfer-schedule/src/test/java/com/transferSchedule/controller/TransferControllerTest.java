@@ -87,10 +87,10 @@ public class TransferControllerTest {
 	}
 	
 	@Test
-	public void testSaveInvalidUser() throws JsonProcessingException, Exception {
+	public void testSaveInvalidSourceAccount() throws JsonProcessingException, Exception {
 		
 		mvc.perform(MockMvcRequestBuilders.post(URL).content(getJsonPayload(ID,
-				"0000000",
+				"0000000000",
 				destinationAccount,
 				transferAmount,
 				transferRate,
@@ -99,7 +99,7 @@ public class TransferControllerTest {
 				.contentType(MediaType.APPLICATION_JSON)
 				.accept(MediaType.APPLICATION_JSON))
 		.andExpect(status().isBadRequest())
-		.andExpect(jsonPath("$.errors[0]").value("A conta de origem deve ter 6 digitos"));
+		.andExpect(jsonPath("$.errors[0]").value("The source account must be informed"));
 		
 	}
 	

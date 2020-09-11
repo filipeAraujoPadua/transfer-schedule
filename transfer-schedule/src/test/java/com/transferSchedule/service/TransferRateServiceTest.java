@@ -3,21 +3,16 @@ package com.transferSchedule.service;
 import static org.junit.Assert.assertNotNull;
 
 import java.util.Date;
-import java.util.List;
-import java.util.Optional;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.BDDMockito;
-import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import com.transferSchedule.entity.TransferRate;
 import com.transferSchedule.repository.TransferRateRepository;
 
 @RunWith(SpringRunner.class)
@@ -44,7 +39,10 @@ public class TransferRateServiceTest {
 	
 	@Test
 	public void testFindRate() {
-		Double response = transferRateService.findRate(new Date(), new Date(), new Double(0));
+		var equalsDate = new Date();
+		Double valor = 0.0;
+		
+		Double response = transferRateService.findRate(equalsDate, equalsDate, valor);
 		assertNotNull(response);
 	}
 }
