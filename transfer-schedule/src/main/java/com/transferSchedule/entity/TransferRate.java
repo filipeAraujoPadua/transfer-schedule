@@ -30,8 +30,11 @@ public class TransferRate implements Serializable{
 	@Column(name = "ID")
 	private Long id;
 	
-	@Column(name = "RATE_RANG_OF_DAYS")
-	private Integer rateRangeOfDays;
+	@Column(name = "RATE_MIN_DAY")
+	private Integer rateMinDay;
+	
+	@Column(name = "RATE_MAX_DAY")
+	private Integer rateMaxDay;
 	
 	@Column(name = "RATE_PERCENTAGE")
 	private Integer ratePercentage;

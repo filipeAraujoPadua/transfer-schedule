@@ -33,8 +33,7 @@ public class TransferRateServiceTest {
 	
 	@Before
 	public void setUp() {
-		
-		BDDMockito.given(transferRateRepository.findByRateRangeOfDays(Mockito.anyInt())).willReturn(Optional.of(new TransferRate()));		
+				
 	}	
 	
 	@Test

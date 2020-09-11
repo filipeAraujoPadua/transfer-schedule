@@ -1,6 +1,7 @@
 package com.transferSchedule.service.impl;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -24,7 +25,45 @@ public class TransferRateServiceImpl implements TransferRateService {
 	@Override
 	public Optional<TransferRate> findByRateRangeOfDays(Integer rateRangeOfDays) {
 
-		return transferRatetepository.findByRateRangeOfDays(rateRangeOfDays);
+		var listTransferRate = this.findAll();
+		var transferRateRespnse = new TransferRate();
+				
+		for (TransferRate obj : listTransferRate) {
+			if(obj.getRateMinDay() > obj.getRateMaxDay()) {
+				transferRateRespnse = TransferRate.builder()
+						.id(obj.getId())
+						.rateMinDay(obj.getRateMinDay())
+						.rateMaxDay(obj.getRateMaxDay())
+						.ratePercentage(obj.getRatePercentage())
+						.rateValue(obj.getRateValue())
+						.rateMultiplier(obj.getRateMultiplier())
+						.transferValueGreater(obj.getTransferValueGreater()).build();
+				break;
+			}
+						
+			if(rateRangeOfDays >= obj.getRateMinDay() 
+					&& rateRangeOfDays <= obj.getRateMaxDay()) {
+				transferRateRespnse = TransferRate.builder()
+						.id(obj.getId())
+						.rateMinDay(obj.getRateMinDay())
+						.rateMaxDay(obj.getRateMaxDay())
+						.ratePercentage(obj.getRatePercentage())
+						.rateValue(obj.getRateValue())
+						.rateMultiplier(obj.getRateMultiplier())
+						.transferValueGreater(obj.getTransferValueGreater()).build();
+				break;
+			}
+		};
+		
+		Optional<TransferRate> response = Optional.of(transferRateRespnse);
+		
+		return response;
+	}
+	
+	@Override
+	public List<TransferRate> findAll() {
+
+		return transferRatetepository.findAll();
 	}
 	
 	public Double findRate(Date transferDate, Date schedulingDate, Double transferAmount) {
@@ -69,15 +108,7 @@ public class TransferRateServiceImpl implements TransferRateService {
 		}
 
 		return response;
-	}
-	
-	private Boolean validateNullEmptyValues(@NonNull Double value) {
-		return Objects.isNull(value) && !value.equals(0);
-	}
-	
-	private Boolean validateNullEmptyValues(@NonNull Integer value) {
-		return Objects.isNull(value) && !value.equals(0);
-	}
+	}	
 
 	public Integer findRangeOfDays(Date transferDate, Date schedulingDate) {
 
@@ -89,5 +120,13 @@ public class TransferRateServiceImpl implements TransferRateService {
 
 		return period.getDays();
 
+	}
+	
+	private Boolean validateNullEmptyValues(@NonNull Double value) {
+		return Objects.isNull(value) && !value.equals(0);
+	}
+	
+	private Boolean validateNullEmptyValues(@NonNull Integer value) {
+		return Objects.isNull(value) && !value.equals(0);
 	}
 }

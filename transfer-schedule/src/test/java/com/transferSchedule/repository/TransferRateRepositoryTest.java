@@ -23,13 +23,14 @@ public class TransferRateRepositoryTest {
 	
 	@Before
 	public void setUp() {
-		TransferRate transferRate = new TransferRate();
-		
-		transferRate.setRateMultiplier(null);
-		transferRate.setRatePercentage(3);
-		transferRate.setRateRangeOfDays(0);
-		transferRate.setRateValue(3.00);
-		transferRate.setTransferValueGreater(null);
+		var transferRate = TransferRate.builder()
+				.id(null)
+				.rateMinDay(0)
+				.rateMaxDay(0)
+				.ratePercentage(3)
+				.rateValue(3.0)
+				.rateMultiplier(null)
+				.transferValueGreater(null).build();
 		
 		transferRateRepository.save(transferRate);
 	}
@@ -42,23 +43,18 @@ public class TransferRateRepositoryTest {
 	
 	@Test
 	public void save () {
-		TransferRate transferRate = new TransferRate();
-		
-		transferRate.setRateMultiplier(null);
-		transferRate.setRatePercentage(3);
-		transferRate.setRateRangeOfDays(0);
-		transferRate.setRateValue(3.00);
-		transferRate.setTransferValueGreater(null);
+		var transferRate = TransferRate.builder()
+				.id(null)
+				.rateMinDay(0)
+				.rateMaxDay(0)
+				.ratePercentage(3)
+				.rateValue(3.0)
+				.rateMultiplier(null)
+				.transferValueGreater(null).build();
 		
 		TransferRate response = transferRateRepository.save(transferRate);
 		
 		assertNotNull(response);
 	}
 	
-	@Test
-	public void findBy() {
-		Optional<TransferRate> response = transferRateRepository.findByRateRangeOfDays(10);
-		
-		assertNotNull(response);
-	}
 }
