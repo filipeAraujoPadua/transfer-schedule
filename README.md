@@ -27,3 +27,55 @@ mvn test
 Documentação
 Utilize a interface do Swagger para ter acesso a documentação dos endpoints, ela está disponível na url http://localhost:8080/swagger-ui.html
 
+Arquitetura de pastas
+
+Diretórios
+transferSchedule
+       |-- src
+         |-- main
+           |-- java
+	     |-- com
+             	|-- transferSchedule
+		  |-- config
+		  |-- controller
+		  |-- entity
+		  |-- mapper
+		  |-- model
+		    |-- request
+		    |-- response
+		  |-- repository
+		  |-- service
+		    |-- impl
+           |-- resources
+         |-- test
+       pom.xml
+
+config
+Esta camada é responsavél por configurações do projeto. Ex: Cors, Rest, swagger...
+
+controller
+Esta camada vai agir como o controlador das requisições rest nos endpoints
+
+entity
+Esta camada responsavel pelas entidades
+
+mapper
+Esta camada e responsavel por fazer a transformacao dos objetos
+
+model
+Camada para os modelos de request e response
+
+repository
+Camada responsavel pela comunicacao com o banco 
+
+service
+Esta camada possui todos os serviços e as regras de negocio
+
+resources
+Recursos do projeto. Ex: configurações de variáveis de ambiente, configurações de banco
+
+test
+Camada onde é centralizado os testes da aplicação.
+
+
+
