@@ -55,6 +55,8 @@ public class TransferController {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
 		}
 
+		transferDto.setTransferRate(rateTransfer);
+		
 		var transfer = transferService.save(transferMapper.convertDtoToEntity(transferDto));
 
 		response.setData(transferMapper.convertEntityToDto(transfer));

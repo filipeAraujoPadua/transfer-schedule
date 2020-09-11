@@ -75,35 +75,32 @@ public class TransferRateServiceImpl implements TransferRateService {
 		Optional<TransferRate> transferRate = findByRateRangeOfDays(rangeOfDays);
 
 		if (transferRate.isPresent()) {
-			this.validateTransferValues(transferAmount, transferRate.get(), rangeOfDays);
+			response = this.validateTransferValues(transferAmount, transferRate.get(), rangeOfDays);
 		}
 
 		return response;
 	}
 
 	private Double validateTransferValues(@NonNull final Double transferAmount, @NonNull TransferRate transferRate, Integer rangeOfDays) {
-		Double response = null;
+		Double response = 0.0;
 		Double onePercentageValue = transferAmount / 100;
 
-		if (this.validateNullEmptyValues(transferRate.getRatePercentage())
+		if (!this.validateNullEmptyValues(transferRate.getRatePercentage())
 				&& this.validateNullEmptyValues(transferRate.getTransferValueGreater())) {
 			response = response + (transferRate.getRatePercentage() * onePercentageValue);
 		}
 
-		if(transferRate.getTransferValueGreater() != null
-				&& transferRate.getRatePercentage() != 0) {
+		if(!transferRate.getTransferValueGreater().isNaN() || (!this.validateNullEmptyValues(transferRate.getTransferValueGreater()))) {
 			if(transferAmount > transferRate.getTransferValueGreater()) {
 				response = response + (transferRate.getRatePercentage() * onePercentageValue);
 			}
 		}
 
-		if (transferRate.getRateValue() != null
-				&& transferRate.getRateValue() != 0) {
+		if (!this.validateNullEmptyValues(transferRate.getRateValue())) {
 			response = response + transferRate.getRateValue();
 		}
 
-		if (transferRate.getRateMultiplier() != null
-				&& transferRate.getRateMultiplier() != 0) {
+		if (!this.validateNullEmptyValues(transferRate.getRateMultiplier())) {
 			response = response + (transferRate.getRateMultiplier() * rangeOfDays);
 		}
 
@@ -123,7 +120,7 @@ public class TransferRateServiceImpl implements TransferRateService {
 	}
 	
 	private Boolean validateNullEmptyValues(@NonNull Double value) {
-		return Objects.isNull(value) && !value.equals(0);
+		return Objects.isNull(value) && !value.equals(0.0);
 	}
 	
 	private Boolean validateNullEmptyValues(@NonNull Integer value) {
